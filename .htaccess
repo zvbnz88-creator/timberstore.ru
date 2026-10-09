@@ -1,0 +1,37 @@
+# timberstore.ru — Beget (Apache)
+DirectoryIndex index.html index.php
+
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # HTTPS (Beget передаёт протокол через X-Forwarded-Proto)
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{ENV:HTTPS} !on
+  RewriteRule ^(.*)$ https://timberstore.ru/$1 [R=301,L]
+  # www -> без www
+  RewriteCond %{HTTP_HOST} ^www\.timberstore\.ru$ [NC]
+  RewriteRule ^(.*)$ https://timberstore.ru/$1 [R=301,L]
+</IfModule>
+
+ErrorDocument 404 /404.html
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+</IfModule>
+
+<FilesMatch "\.(php)$">
+  <IfModule mod_headers.c>
+    Header set X-Robots-Tag "noindex"
+  </IfModule>
+</FilesMatch>
+
+Options -Indexes

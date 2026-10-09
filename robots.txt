@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /mail/
+Disallow: /cart/
+Disallow: /*?add-to-cart
+
+User-agent: Yandex
+Allow: /
+Disallow: /mail/
+Disallow: /cart/
+Disallow: /*?add-to-cart
+
+Sitemap: https://timberstore.ru/sitemap.xml
+Host: timberstore.ru
