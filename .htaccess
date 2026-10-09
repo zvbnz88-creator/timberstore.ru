@@ -12,6 +12,8 @@ AddDefaultCharset UTF-8
   # www -> без www
   RewriteCond %{HTTP_HOST} ^www\.timberstore\.ru$ [NC]
   RewriteRule ^(.*)$ https://timberstore.ru/$1 [R=301,L]
+  # /index.html -> главная
+  RewriteRule ^index\.html$ https://timberstore.ru/ [R=301,L]
 </IfModule>
 
 ErrorDocument 404 /404.html
